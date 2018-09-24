@@ -31,13 +31,13 @@ class Player:
         """
         return len(self.__queue)
 
-    def print_queue(self):
+    def get_queue(self):
         """
         Prints the queue
 
-        :return: none
+        :return: list
         """
-        print("ABC")
+        return self.__queue
 
     def add_song(self, url):
         """
@@ -49,7 +49,7 @@ class Player:
         self.__queue.append(new_song)
 
         if not self.__media_player.is_playing():
-            self.play()
+            self.__play()
 
     def remove_song(self, pos):
         """
@@ -125,9 +125,9 @@ class Player:
         self.__stop()
 
         if len(self.__queue) > 0:
-            self.play()
+            self.__play()
 
-    def play(self):
+    def __play(self):
         """
         Plays the first song in the queue.
 
