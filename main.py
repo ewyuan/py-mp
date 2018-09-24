@@ -92,7 +92,6 @@ if __name__ == "__main__":
                 print("\n"
                       "pause - Pause the current song\n"
                       "resume - Resumes the current song\n"
-                      "stop - Stop playing the current song\n"
                       "add [song] - Adds [song] to the queue\n"
                       "exit - Exits the program")
 
@@ -104,15 +103,11 @@ if __name__ == "__main__":
 
             elif user_opt == 'pause':
                 player.pause()
-                print("Song has been paused.")
+                print("Pausing " + player.get_current_song() + ".")
 
             elif user_opt == 'resume':
                 player.resume()
-                print("Resuming song.")
-
-            elif user_opt == 'stop':
-                player.stop()
-                print("Song has been stopped.")
+                print("Resuming " + player.get_current_song() + ".")
 
             elif user_opt == 'exit':
                 break
