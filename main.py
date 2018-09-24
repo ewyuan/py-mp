@@ -91,6 +91,11 @@ if __name__ == "__main__":
             if user_opt == 'help':
                 print("\npause - Pause the current song\nresume - Resumes the current song\nstop - Stop playing the current song\n")
 
+            elif user_opt[0:4] == 'add':
+                query = user_opt[4:]
+                url = grab_search_query(query)
+                player.add_song(url)
+
             elif user_opt == 'pause':
                 player.pause()
                 print("Song has been paused.")
