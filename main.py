@@ -92,10 +92,11 @@ if __name__ == "__main__":
                       "pause - Pause the current song\n"
                       "resume - Resumes the current song\n"
                       "add [song] - Adds [song] to the queue\n"
+                      "skip - Plays the next song in queue\n"
                       "exit - Exits the program")
 
             elif user_opt[0:3] == 'add':
-                query = user_opt[3:]
+                query = user_opt[4:]
                 url = grab_search_query(query)
                 player.add_song(url)
                 print("Added " + query + " to queue.")
@@ -107,6 +108,10 @@ if __name__ == "__main__":
             elif user_opt == 'resume':
                 player.resume()
                 print("Resuming " + player.get_current_song().get_title() + ".")
+
+            elif user_opt == 'skip':
+                player.skip()
+                print("Skipping " + player.get_previous_song().get_title() + ".")
 
             elif user_opt == 'exit':
                 break
