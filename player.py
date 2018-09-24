@@ -63,7 +63,7 @@ class Player:
 
         :return: Song
         """
-        print(self.__current_song.get_title())
+        self.__current_song
 
     def get_next_song(self):
         """
@@ -71,7 +71,7 @@ class Player:
 
         :return: Song
         """
-        print(self.__next_song.get_title())
+        self.__next_song
 
     def get_previous_song(self):
         """
@@ -79,7 +79,7 @@ class Player:
 
         :return: Song
         """
-        print(self.__previous_song.get_title())
+        self.__previous_song
 
     def pause(self):
         """
@@ -106,10 +106,27 @@ class Player:
 
     def play(self):
         """
-        Plays the current song, moves to the next song in queue.
+        Plays the first song in the queue.
 
         :return: none
         """
+
+        self.__previous_song = self.__current_song
+
+        if self.__next_song != None:
+            self.__current_song = self.__next_song
+        else:
+            self.__current_song = self.__queue[0]
+
+        remove_song(0)
+
+        if get_queue_size() == 0:
+            self.__next_song = None
+        else:
+            self.__next_song = self.__queue[0]
+
+        self.__media_player.set_media(self.__current_song.get_media())
+        self.__media_player.play()
 
     def clear_queue(self):
         """
