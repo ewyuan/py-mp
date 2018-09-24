@@ -40,8 +40,8 @@ def download(url):
         ydl.download([url])
 
 def test(url):
-    video = pafy.new(url)
-    best = video.getbest()
+    audio = pafy.new(url)
+    best = audio.getbestaudio()
     playurl = best.url
 
     a = vlc.Instance()
@@ -50,7 +50,7 @@ def test(url):
     m.get_mrl()
     player.set_media(m)
     player.play()
-    time.sleep(video.length)
+    time.sleep(audio.length)
 
 # def test(url):
 #     audio = pafy.new(url)
