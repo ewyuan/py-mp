@@ -36,7 +36,7 @@ class Song:
 
         :return: str
         """
-        return self.__audio.url
+        return self.__audio.getbestaudio().url
 
     def get_media(self):
         """
