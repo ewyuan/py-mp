@@ -8,11 +8,11 @@ import song
 
 class Player:
     def __init__(self):
-    """
-    Instantiates a Player object.
+        """
+        Instantiates a Player object.
 
-    :return: None
-    """
+        :return: None
+        """
         self.__queue = []
         self.__current_song = None
         self.__next_song = None
@@ -37,7 +37,7 @@ class Player:
 
         :return: none
         """
-        print "ABC"
+        print("ABC")
 
     def add_song(self, url):
         """
@@ -100,6 +100,13 @@ class Player:
     def skip(self):
         """
         Skips the current song, moves to the next song in queue.
+
+        :return: none
+        """
+
+    def play(self):
+        """
+        Plays the current song, moves to the next song in queue.
 
         :return: none
         """
