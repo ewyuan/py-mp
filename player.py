@@ -106,6 +106,10 @@ class Player:
         """
         self.__media_player.stop()
 
+        self.__previous_song = self.__current_song
+
+        self.remove_song(0)
+
     def skip(self):
         """
         Skips the current song, moves to the next song in queue.
@@ -120,14 +124,10 @@ class Player:
         :return: none
         """
 
-        self.__previous_song = self.__current_song
-
         if self.__next_song is not None:
             self.__current_song = self.__next_song
         else:
             self.__current_song = self.__queue[0]
-
-        self.remove_song(0)
 
         if self.get_queue_size() == 0:
             self.__next_song = None
