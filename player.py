@@ -89,6 +89,15 @@ class Player:
         """
         self.__media_player.set_pause(True)
 
+    def resume(self):
+        """
+        Resumes the current song.
+
+        :return: none
+        """
+
+        self.__media_player.set_pause(False)
+
     def stop(self):
         """
         Stops the current song, moves to the next song in queue.
