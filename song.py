@@ -26,7 +26,7 @@ class Song:
         """
         Returns the length of this Song.
 
-        :return: str
+        :return: int
         """
         return self.__audio.length
 
@@ -45,4 +45,3 @@ class Song:
         :return: str
         """
         return self.__media
-

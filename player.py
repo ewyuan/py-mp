@@ -63,7 +63,7 @@ class Player:
 
         :return: Song
         """
-        return self.__current_song()
+        return self.__current_song
 
     def get_next_song(self):
         """
@@ -71,7 +71,7 @@ class Player:
 
         :return: Song
         """
-        return self.__next_song()
+        return self.__next_song
 
     def get_previous_song(self):
         """
@@ -79,7 +79,7 @@ class Player:
 
         :return: Song
         """
-        return self.__previous_song()
+        return self.__previous_song
 
     def pause(self):
         """

@@ -81,7 +81,9 @@ if __name__ == "__main__":
     player.add_song(url)
     player.play()
     start_time = time.time()
-    while (time.time() - start_time) < player.get_current_song().get_length().length:
+    prompt_printed = False
+    user_opt = 'none'
+    while (time.time() - start_time) < player.get_current_song().get_length():
         if not prompt_printed:
             user_opt = input('Enter control option (type help for list of available options): ')
             prompt_printed = True
@@ -93,9 +95,9 @@ if __name__ == "__main__":
                 player.pause()
                 print("Song has been paused.")
 
-            # elif user_opt == 'resume':
-            #     player.re
-            #     print("Resuming song.")
+            elif user_opt == 'resume':
+                player.resume()
+                print("Resuming song.")
 
             elif user_opt == 'stop':
                 player.stop()
