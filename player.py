@@ -21,7 +21,7 @@ class Player:
         self.__is_occupied = False
 
         self.__vlc_instance = vlc.Instance()
-        self.__media_player = vlc_instance.media_player_new()
+        self.__media_player = self.__vlc_instance.media_player_new()
 
     def get_queue_size(self):
         """
@@ -63,7 +63,7 @@ class Player:
 
         :return: Song
         """
-        self.__current_song
+        return self.__current_song()
 
     def get_next_song(self):
         """
@@ -71,7 +71,7 @@ class Player:
 
         :return: Song
         """
-        self.__next_song
+        return self.__next_song()
 
     def get_previous_song(self):
         """
@@ -79,7 +79,7 @@ class Player:
 
         :return: Song
         """
-        self.__previous_song
+        return self.__previous_song()
 
     def pause(self):
         """
@@ -113,14 +113,14 @@ class Player:
 
         self.__previous_song = self.__current_song
 
-        if self.__next_song != None:
+        if self.__next_song is not None:
             self.__current_song = self.__next_song
         else:
             self.__current_song = self.__queue[0]
 
-        remove_song(0)
+        self.remove_song(0)
 
-        if get_queue_size() == 0:
+        if self.get_queue_size() == 0:
             self.__next_song = None
         else:
             self.__next_song = self.__queue[0]
