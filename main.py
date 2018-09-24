@@ -5,6 +5,7 @@ import bs4
 import vlc
 import youtube_dl
 
+paused = False
 
 def grab_search_query(search_query):
     """
@@ -39,43 +40,58 @@ def download(url):
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
 
-def test(url):
+def play_audio(url):
     audio = pafy.new(url)
-    best = audio.getbestaudio()
-    playurl = best.url
+    best_audio_url = audio.getbestaudio().url
 
-    a = vlc.Instance()
-    player = a.media_player_new()
-    m = a.media_new(playurl)
-    m.get_mrl()
-    player.set_media(m)
-    player.play()
-    time.sleep(audio.length)
+    # Create a new vlc instance
+    vlc_instance = vlc.Instance()
+    # Create a new media player instance
+    media_player = vlc_instance.media_player_new()
+    # Create a new media instance
+    media = vlc_instance.media_new(best_audio_url)
 
-# def test(url):
-#     audio = pafy.new(url)
-#     best = audio.audiostreams[0]
-#     instance = vlc.Instance('--input-repeat=-1', '--fullscreen')
-#
-#     # Define VLC player
-#     player = instance.media_player_new()
-#
-#     # Define VLC media
-#     media = instance.media_new(best)
-#
-#     # Set player media
-#     player.set_media(media)
-#
-#     # Play the media
-#     player.play()
-#
-#     time.sleep(10)
+    # Set the media and start the player
+    media_player.set_media(media)
+    media_player.play()
 
+    global paused
 
+    starting_time = time.time()
+    prompt_printed = False
+    user_opt = 'none'
+    while (time.time() - starting_time) < audio.length:
+        if not prompt_printed:
+            user_opt = input('Enter control option (type help for list of available options): ')
+            prompt_printed = True
+        else:
+            if user_opt == 'help':
+                print("\npause - Pause the current song\nresume - Resumes the current song\nstop - Stop playing the current song\n")
+
+            elif user_opt == 'pause':
+                media_player.set_pause(True)
+                print("Song has been paused.")
+
+            elif user_opt == 'resume':
+                media_player.set_pause(False)
+                print("Resuming song.")
+
+            elif user_opt == 'stop':
+                media_player.stop()
+                print("Song has been stopped.")
+                break
+
+            else:
+                print("Option " + user_opt + " not supported.")
+
+            prompt_printed = False
+
+    print("Song completed in " + str(time.time() - starting_time) + "s")
 
 
 if __name__ == "__main__":
     start_time = time.time()
-    result = grab_search_query("work in me")
-    test(result[1])
+    song_name = input("Please enter the song you are searching for: ")
+    result = grab_search_query(song_name)
+    play_audio(result[1])
     print("--- %s seconds ---" % (time.time() - start_time))
