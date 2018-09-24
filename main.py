@@ -80,8 +80,29 @@ if __name__ == "__main__":
     url = grab_search_query(search_query)
     player.add_song(url)
     player.play()
-    # start_time = time.time()
-    # song_name = input("Please enter the song you are searching for: ")
-    # result = grab_search_query(song_name)
-    # play_audio(result[1])
-    # print("--- %s seconds ---" % (time.time() - start_time))
+    start_time = time.time()
+    while (time.time() - start_time) < player.get_current_song().get_length().length:
+        if not prompt_printed:
+            user_opt = input('Enter control option (type help for list of available options): ')
+            prompt_printed = True
+        else:
+            if user_opt == 'help':
+                print("\npause - Pause the current song\nresume - Resumes the current song\nstop - Stop playing the current song\n")
+
+            elif user_opt == 'pause':
+                player.pause()
+                print("Song has been paused.")
+
+            # elif user_opt == 'resume':
+            #     player.re
+            #     print("Resuming song.")
+
+            elif user_opt == 'stop':
+                player.stop()
+                print("Song has been stopped.")
+                break
+
+            else:
+                print("Option " + user_opt + " not supported.")
+
+            prompt_printed = False
