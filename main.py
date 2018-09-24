@@ -4,6 +4,9 @@ import time
 import bs4
 import vlc
 import youtube_dl
+import pdb
+import re
+
 from player import Player
 
 # paused = False
@@ -21,8 +24,12 @@ def grab_search_query(search_query):
     session = requests.get(url=url)
     soup = bs4.BeautifulSoup(session.content, "html.parser")
     videos = soup.findAll('a', attrs={'class': 'yt-uix-tile-link'})
-
-    most_relevant_url = base_url + videos[0]["href"]
+    regex = re.compile("^/watch\?v=.*$")
+    filtered_videos = []
+    for item in videos:
+        if regex.search(item["href"]):
+            filtered_videos.append(item["href"])
+    most_relevant_url = base_url + filtered_videos[0]
     return most_relevant_url
 #
 # def play_audio(url):
