@@ -1,11 +1,12 @@
 import sys
 import pafy
-import youtube_dl
+from pytube import YouTube
 import requests
 import time
 import bs4
 import vlc
 import simpleaudio as sa
+import youtube_dl
 
 
 def grab_search_query(search_query):
@@ -21,11 +22,46 @@ def grab_search_query(search_query):
     session = requests.get(url=url)
     soup = bs4.BeautifulSoup(session.content, "html.parser")
     videos = soup.findAll('a', attrs={'class': 'yt-uix-tile-link'})
-
     most_relevant_title = videos[0]["title"]
     most_relevant_url = base_url + videos[0]["href"]
-    return (most_relevant_title, most_relevant_title)
+    return (most_relevant_title, most_relevant_url)
 
+
+def download(url):
+    # yt = YouTube(url)
+    # stream = yt.streams.filter(only_audio=True).all()[2]
+    # return stream.download("/tmp")
+
+    # ydl_opts = {
+    #     'postprocessors': [{
+    #         'key': 'FFmpegExtractAudio',
+    #         'preferredcodec': 'mp3',
+    #         'preferredquality': '128',
+    #     }],
+    # }
+    # with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+    #     ydl.download([url])
+
+    instance = vlc.Instance()
+
+    # Create a MediaPlayer with the default instance
+    player = instance.media_player_new()
+
+    # Load the media file
+    media = instance.media_new("Quavo - W O R K I N  M E-nmjgIrBHg6Y.mp3")
+
+
+    # Add the media to the player
+    player.set_media(media)
+
+    print(media.get_duration())
+
+    # Play for 10 seconds then exit
+    player.play()
+    time.sleep(10)
+    #
+    # p = vlc.MediaPlayer(url)
+    # p.play()
 
 
 def test(url):
@@ -51,7 +87,7 @@ def test(url):
 
 
 if __name__ == "__main__":
-    grab_search_query("work in me")
-    # a = search_youtube("workinme")
-    # print(a)
-    # test("https://www.youtube.com/watch?v=nmjgIrBHg6Y")
+    start_time = time.time()
+    result = grab_search_query("work in me")
+    print(download(result[1]))
+    print("--- %s seconds ---" % (time.time() - start_time))
