@@ -15,7 +15,7 @@ def grab_search_query(search_query):
     :param search_query: str
     :return: str
     """
-    search_query.replace(" ", "+")
+    search_query = search_query.replace(" ", "+")
     base_url = "https://www.youtube.com"
     url = base_url + "/results?sp=EgIQAVAU&q=" + search_query
     session = requests.get(url=url)
@@ -84,14 +84,16 @@ if __name__ == "__main__":
     user_opt = 'none'
     while True:
         if not prompt_printed:
-            user_opt = input('Enter control option (type help for list of available options): ')
+            user_opt = input("Enter control option (Type 'help' for list of available options): ")
             prompt_printed = True
         else:
             if user_opt == 'help':
                 print("\n"
+                      "add [song] - Adds [song] to the queue\n"
+                      "clear - Clears the queue\n"
                       "pause - Pause the current song\n"
                       "resume - Resumes the current song\n"
-                      "add [song] - Adds [song] to the queue\n"
+                      "queue - Prints the current queue\n"
                       "skip - Plays the next song in queue\n"
                       "exit - Exits the program")
 
@@ -100,6 +102,17 @@ if __name__ == "__main__":
                 url = grab_search_query(query)
                 player.add_song(url)
                 print("Added " + query + " to queue.")
+
+            elif user_opt == 'clear':
+                player.clear_queue()
+                print("Cleared the queue.")
+
+            elif user_opt == "queue": # not displaying queue properly
+                output = ""
+                queue = player.get_queue()
+                for i in range(len(queue)):
+                    output += "[" + str(i + 1) + "] - " + queue[i].get_title() + "\n"
+                print(queue)
 
             elif user_opt == 'pause':
                 player.pause()
