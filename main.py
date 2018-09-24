@@ -10,10 +10,10 @@ from player import Player
 #
 def grab_search_query(search_query):
     """
-    Returns a tuple containing the most relevant title and its URL with the corresponding search query.
+    Returns the most relevant URL with the corresponding search query.
 
     :param search_query: str
-    :return: tuple(str, str)
+    :return: str
     """
     search_query.replace(" ", "+")
     base_url = "https://www.youtube.com"
@@ -22,9 +22,8 @@ def grab_search_query(search_query):
     soup = bs4.BeautifulSoup(session.content, "html.parser")
     videos = soup.findAll('a', attrs={'class': 'yt-uix-tile-link'})
 
-    most_relevant_title = videos[0]["title"]
     most_relevant_url = base_url + videos[0]["href"]
-    return (most_relevant_title, most_relevant_url)
+    return most_relevant_url
 #
 # def play_audio(url):
 #     audio = pafy.new(url)
