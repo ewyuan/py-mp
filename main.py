@@ -83,18 +83,24 @@ if __name__ == "__main__":
     start_time = time.time()
     prompt_printed = False
     user_opt = 'none'
-    while (time.time() - start_time) < player.get_current_song().get_length():
+    while True:
         if not prompt_printed:
             user_opt = input('Enter control option (type help for list of available options): ')
             prompt_printed = True
         else:
             if user_opt == 'help':
-                print("\npause - Pause the current song\nresume - Resumes the current song\nstop - Stop playing the current song\n")
+                print("\n"
+                      "pause - Pause the current song\n"
+                      "resume - Resumes the current song\n"
+                      "stop - Stop playing the current song\n"
+                      "add [song] - Adds [song] to the queue\n"
+                      "exit - Exits the program")
 
             elif user_opt[0:3] == 'add':
                 query = user_opt[3:]
                 url = grab_search_query(query)
                 player.add_song(url)
+                print("Added " + query + " to queue.")
 
             elif user_opt == 'pause':
                 player.pause()
@@ -107,6 +113,8 @@ if __name__ == "__main__":
             elif user_opt == 'stop':
                 player.stop()
                 print("Song has been stopped.")
+
+            elif user_opt == 'exit':
                 break
 
             else:
