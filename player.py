@@ -98,7 +98,7 @@ class Player:
 
         self.__media_player.set_pause(False)
 
-    def stop(self):
+    def __stop(self):
         """
         Stops the current song, moves to the next song in queue.
 
@@ -117,7 +117,10 @@ class Player:
         :return: none
         """
 
-    def play(self):
+        self.__stop()
+        self.__play()
+
+    def __play(self):
         """
         Plays the first song in the queue.
 
