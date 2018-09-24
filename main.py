@@ -79,7 +79,6 @@ if __name__ == "__main__":
     search_query = input("Please enter the song you are searching for: ")
     url = grab_search_query(search_query)
     player.add_song(url)
-    player.play()
     start_time = time.time()
     prompt_printed = False
     user_opt = 'none'
@@ -103,11 +102,11 @@ if __name__ == "__main__":
 
             elif user_opt == 'pause':
                 player.pause()
-                print("Pausing " + player.get_current_song() + ".")
+                print("Pausing " + player.get_current_song().get_title() + ".")
 
             elif user_opt == 'resume':
                 player.resume()
-                print("Resuming " + player.get_current_song() + ".")
+                print("Resuming " + player.get_current_song().get_title() + ".")
 
             elif user_opt == 'exit':
                 break

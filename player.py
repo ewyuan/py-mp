@@ -48,6 +48,9 @@ class Player:
         new_song = song.Song(url, self.__vlc_instance)
         self.__queue.append(new_song)
 
+        if not self.__media_player.is_playing():
+            self.play()
+
     def remove_song(self, pos):
         """
         Removes a song from the queue, given the position in the queue
@@ -104,11 +107,13 @@ class Player:
 
         :return: none
         """
+
         self.__media_player.stop()
 
         self.__previous_song = self.__current_song
 
-        self.remove_song(0)
+        if self.get_queue_size() > 0:
+            self.remove_song(0)
 
     def skip(self):
         """
@@ -118,27 +123,32 @@ class Player:
         """
 
         self.__stop()
-        self.__play()
 
-    def __play(self):
+        if len(self.__queue) > 0:
+            self.play()
+
+    def play(self):
         """
         Plays the first song in the queue.
 
         :return: none
         """
 
-        if self.__next_song is not None:
-            self.__current_song = self.__next_song
-        else:
-            self.__current_song = self.__queue[0]
-
         if self.get_queue_size() == 0:
-            self.__next_song = None
+            print("No songs in queue to play.")
         else:
-            self.__next_song = self.__queue[0]
+            if self.__next_song is not None:
+                self.__current_song = self.__next_song
+            else:
+                self.__current_song = self.__queue[0]
 
-        self.__media_player.set_media(self.__current_song.get_media())
-        self.__media_player.play()
+            if self.get_queue_size() == 1:
+                self.__next_song = None
+            else:
+                self.__next_song = self.__queue[1]
+
+            self.__media_player.set_media(self.__current_song.get_media())
+            self.__media_player.play()
 
     def clear_queue(self):
         """
