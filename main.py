@@ -39,6 +39,18 @@ def download(url):
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
 
+def test(url):
+    video = pafy.new(url)
+    best = video.getbest()
+    playurl = best.url
+
+    a = vlc.Instance()
+    player = a.media_player_new()
+    m = a.media_new(playurl)
+    m.get_mrl()
+    player.set_media(m)
+    player.play()
+    time.sleep(video.length)
 
 # def test(url):
 #     audio = pafy.new(url)
@@ -65,5 +77,5 @@ def download(url):
 if __name__ == "__main__":
     start_time = time.time()
     result = grab_search_query("work in me")
-    print(download(result[1]))
+    test(result[1])
     print("--- %s seconds ---" % (time.time() - start_time))
