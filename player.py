@@ -1,10 +1,6 @@
-import pafy
-import requests
-import time
-import bs4
 import vlc
-import youtube_dl
 import song
+import time
 
 class Player:
     def __init__(self):
@@ -49,7 +45,7 @@ class Player:
         self.__queue.append(new_song)
 
         if not self.__media_player.is_playing():
-            self.__play()
+            self.play_next()
 
     def remove_song(self, pos):
         """
@@ -125,9 +121,9 @@ class Player:
         self.__stop()
 
         if len(self.__queue) > 0:
-            self.__play()
+            self.play_next()
 
-    def __play(self):
+    def play_next(self):
         """
         Plays the first song in the queue.
 
@@ -147,8 +143,10 @@ class Player:
             else:
                 self.__next_song = self.__queue[1]
 
+            self.__queue.pop(0)
             self.__media_player.set_media(self.__current_song.get_media())
             self.__media_player.play()
+
 
     def clear_queue(self):
         """
@@ -157,3 +155,6 @@ class Player:
         :return: none
         """
         self.__queue = []
+
+    def get_state(self):
+        return self.__media_player.get_state()
