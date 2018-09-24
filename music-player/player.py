@@ -1,6 +1,6 @@
 import vlc
-import song
-import time
+from . import song
+
 
 class Player:
     def __init__(self):
@@ -147,7 +147,6 @@ class Player:
             self.__media_player.set_media(self.__current_song.get_media())
             self.__media_player.play()
 
-
     def clear_queue(self):
         """
         Clears the current queue.
@@ -157,4 +156,9 @@ class Player:
         self.__queue = []
 
     def get_state(self):
+        """
+        Returns the state of the MediaPlayer.
+
+        :return: int
+        """
         return self.__media_player.get_state()

@@ -1,17 +1,10 @@
-import pafy
 import requests
-import time
 import bs4
-import vlc
-import youtube_dl
-import pdb
 import threading
 import re
+from .player import Player
 
-from player import Player
 
-# paused = False
-#
 def grab_search_query(search_query):
     """
     Returns the most relevant URL with the corresponding search query.

@@ -1,5 +1,6 @@
 import pafy
 
+
 class Song:
     def __init__(self, url, vlc):
         """
