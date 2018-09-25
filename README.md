@@ -1,5 +1,5 @@
 # songify
-A simple, yet powerful, command-line music player
+A simple command-line music player
 
 ## Prerequisites
 * Python 3
