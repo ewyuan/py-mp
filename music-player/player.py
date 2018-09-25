@@ -1,5 +1,5 @@
 import vlc
-from . import song
+import song
 
 
 class Player:
@@ -44,17 +44,27 @@ class Player:
         new_song = song.Song(url, self.__vlc_instance)
         self.__queue.append(new_song)
 
-        if not self.__media_player.is_playing():
+        if self.get_queue_size() == 1:
+            self.__next_song = new_song
+
+        if not self.__media_player.is_playing() and self.__current_song is None:
             self.play_next()
 
     def remove_song(self, pos):
         """
-        Removes a song from the queue, given the position in the queue
+        Removes a song from the queue, given the position in the queue, and returns the item removed.
 
         :param pos: int
-        :return: none
+        :return: Song
         """
-        self.__queue.pop(pos)
+
+        if self.__queue[pos] == self.__next_song:
+            if not pos == self.get_queue_size() - 1:
+                self.__next_song = self.__queue[pos+1]
+            else:
+                self.__next_song = None
+
+        return self.__queue.pop(pos)
 
     def get_current_song(self):
         """
@@ -107,9 +117,10 @@ class Player:
         self.__media_player.stop()
 
         self.__previous_song = self.__current_song
+        self.__current_song = None
 
-        if self.get_queue_size() > 0:
-            self.remove_song(0)
+    def rewind(self):
+        self.__media_player.set_time(0)
 
     def skip(self):
         """

@@ -2,7 +2,7 @@ import requests
 import bs4
 import threading
 import re
-from .player import Player
+from player import Player
 
 
 def grab_search_query(search_query):
@@ -47,7 +47,12 @@ def handle_inputs(player):
                       "resume - Resumes the current song\n"
                       "queue - Prints the current queue\n"
                       "skip - Plays the next song in queue\n"
-                      "exit - Exits the program")
+                      "cur - Get the title of the current song\n"
+                      "prev - Get the title of the previous song\n"
+                      "next - Get the title of the next song\n"
+                      "rewind - Restart the current song\n"
+                      "remove [pos] - Removes the song in position [pos] from the q\n"
+                      "exit - Exits the program\n")
 
             elif user_opt[0:3] == 'add':
                 query = user_opt[4:]
@@ -59,13 +64,6 @@ def handle_inputs(player):
                 player.clear_queue()
                 print("Cleared the queue.")
 
-            elif user_opt == "queue":  # not displaying queue properly
-                output = ""
-                queue = player.get_queue()
-                for i in range(len(queue)):
-                    output += "[" + str(i + 1) + "] - " + queue[i].get_title() + "\n"
-                print(queue)
-
             elif user_opt == 'pause':
                 player.pause()
                 print("Pausing '" + player.get_current_song().get_title() + "'.")
@@ -74,9 +72,55 @@ def handle_inputs(player):
                 player.resume()
                 print("Resuming '" + player.get_current_song().get_title() + "'.")
 
+            elif user_opt == "queue":  # not displaying queue properly
+                output = ""
+                queue = player.get_queue()
+                for i in range(len(queue)):
+                    output += "[" + str(i + 1) + "] - " + queue[i].get_title() + "\n"
+                print(output)
+
             elif user_opt == 'skip':
                 player.skip()
                 print("Skipping '" + player.get_previous_song().get_title() + "'.")
+
+            elif user_opt == 'cur':
+                cur_song = player.get_current_song()
+                if cur_song is not None:
+                    print("'" + cur_song.get_title() + "'.")
+                else:
+                    print("No song is currently playing.")
+
+            elif user_opt == 'prev':
+                prev_song = player.get_previous_song()
+                if prev_song is not None:
+                    print("'" + prev_song.get_title() + "'.")
+                else:
+                    print("No song was previously playing.")
+
+            elif user_opt == 'next':
+                next_song = player.get_next_song()
+                if next_song is not None:
+                    print("'" + next_song.get_title() + "'.")
+                else:
+                    print("No song is queued up to play next.")
+
+            elif user_opt == 'rewind':
+                player.rewind()
+
+            elif user_opt[0:6] == 'remove':
+                pos_not_int = False
+                try:
+                    pos = int(user_opt[7:]) - 1
+                except:
+                    print("Illegal position entered.")
+                    pos_not_int = True
+
+                if not pos_not_int:
+                    if pos >= player.get_queue_size() or pos < 0:
+                        print("Illegal position entered.")
+                    else:
+                        removed_song = player.remove_song(pos)
+                        print("Removed " + removed_song.get_title() + " from queue")
 
             elif user_opt == 'exit':
                 break
