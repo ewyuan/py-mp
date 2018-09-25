@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='py-mp',
-    packages=['py-mp'],
+    packages=['pymp'],
     author='EddyMaric, ewyuan',
     author_email='eddy.maric98@gmail.com, eric.yuan@mail.utoronto.ca',
     description='A simple command-line music player',
@@ -11,7 +11,7 @@ setup(
     url='http://github.com/ewyuan/py-mp',
     entry_points={
         'console_scripts': [
-            'py-mp = py-mp.__main__:main'
+            'py-mp = pymp.__main__:main'
         ]
     },
     version='1.0',
