@@ -9,7 +9,7 @@ setup(
     url='http://github.com/ewyuan/music-player',
     entry_points={
         'console_scripts': [
-            'songify = '
+            'songify = songify.__main__:main'
         ]
     },
     version='1.0',
