@@ -1,15 +1,15 @@
 from setuptools import setup
 
 setup(
-    name='music-player',
-    packages=['music-player'],
+    name='songify',
+    packages=['songify'],
     author='EddyMaric, ewyuan',
-    author_email='nishanpantha@gmail.com',
-    description='A command-line music player',
+    author_email='eddy.maric98@gmail.com, eric.yuan@mail.utoronto.ca',
+    description='A simple command-line music player',
     url='http://github.com/ewyuan/music-player',
     entry_points={
         'console_scripts': [
-            'music-player = music-player.run:main'
+            'songify = '
         ]
     },
     version='1.0',
