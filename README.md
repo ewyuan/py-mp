@@ -30,3 +30,7 @@ rewind                # Restart the current song
 remove [position]     # Removes the song in position [position] from the queue
 exit                  # Exits the program
 ```
+
+## Contributors
+* Eddy Maric https://github.com/EddyMaric
+* Eric Yuan https://github.com/ewyuan/
