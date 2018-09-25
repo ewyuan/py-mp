@@ -6,7 +6,7 @@ setup(
     author='EddyMaric, ewyuan',
     author_email='eddy.maric98@gmail.com, eric.yuan@mail.utoronto.ca',
     description='A simple command-line music player',
-    url='http://github.com/ewyuan/music-player',
+    url='http://github.com/ewyuan/songify',
     entry_points={
         'console_scripts': [
             'songify = songify.__main__:main'
