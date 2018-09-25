@@ -115,7 +115,11 @@ class Player:
         self.__current_song = None
 
     def rewind(self):
+        state = self.__media_player.get_state()
+        self.__media_player.set_pause(0)
         self.__media_player.set_time(0)
+        if state == vlc.State.Paused:
+            self.__media_player.set_pause(1)
 
     def skip(self):
         """
