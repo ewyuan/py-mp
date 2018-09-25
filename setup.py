@@ -14,6 +14,6 @@ setup(
             'py-mp = pymp.__main__:main'
         ]
     },
-    version='1.0',
+    version='1.1',
     install_requires=['python-vlc', 'requests', 'beautifulsoup4', 'pafy', 'youtube-dl'],
 )
