@@ -1,5 +1,5 @@
 # songify
-A simple command-line music player
+Songify uses command-line to take in inputs from the user and makes a search query on Youtube. Songify will pull the most relevant video and will stream the audio to the computer.
 
 ## Prerequisites
 * Python 3
