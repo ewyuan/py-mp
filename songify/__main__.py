@@ -1,11 +1,11 @@
-import helper
 import threading
-from player import Player
+from .player import Player
+from .helper import handle_inputs
 
 
 def main():
     player = Player()
-    input_thread = threading.Thread(target=helper.handle_inputs, args=(player,))
+    input_thread = threading.Thread(target=handle_inputs, args=(player,))
     input_thread.start()
     while True:
         if player.get_state().value == 6:

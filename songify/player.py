@@ -1,5 +1,5 @@
 import vlc
-import song
+from .song import Song
 
 
 class Player:
@@ -39,7 +39,7 @@ class Player:
 
         :return: none
         """
-        new_song = song.Song(url, self.__vlc_instance)
+        new_song = Song(url, self.__vlc_instance)
         self.__queue.append(new_song)
 
         if self.get_queue_size() == 1:
