@@ -69,8 +69,12 @@ def handle_inputs(player):
             elif user_opt[0:3] == 'add' and len(user_opt) > 4:
                 query = user_opt[4:]
                 url = grab_search_query(query)
-                player.add_song(url)
-                print("Added '" + query + "' to queue.")
+
+                if url is not None:
+                    player.add_song(url)
+                    print("Added '" + query + "' to queue.")
+                else:
+                    print("Song '" + search_query + "' not found.")
 
             elif user_opt == 'clear':
                 player.clear_queue()
