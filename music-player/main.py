@@ -49,7 +49,6 @@ def handle_inputs(player):
                       "skip - Plays the next song in queue\n"
                       "cur - Get the title of the current song\n"
                       "prev - Get the title of the previous song\n"
-                      "next - Get the title of the next song\n"
                       "rewind - Restart the current song\n"
                       "remove [pos] - Removes the song in position [pos] from the q\n"
                       "exit - Exits the program\n")
@@ -96,13 +95,6 @@ def handle_inputs(player):
                     print("'" + prev_song.get_title() + "'.")
                 else:
                     print("No song was previously playing.")
-
-            elif user_opt == 'next':
-                next_song = player.get_next_song()
-                if next_song is not None:
-                    print("'" + next_song.get_title() + "'.")
-                else:
-                    print("No song is queued up to play next.")
 
             elif user_opt == 'rewind':
                 player.rewind()
