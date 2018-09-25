@@ -173,3 +173,27 @@ class Player:
         :return: int
         """
         return self.__media_player.get_state()
+
+    def get_length(self):
+        """
+        Returns the length (in ms) of the current song.
+
+        :return: int
+        """
+        return self.__media_player.get_length()
+
+    def get_time(self):
+        """
+        Returns the time (in ms) of the current song.
+
+        :return: int
+        """
+        return self.__media_player.get_time()
+
+    def get_position(self):
+        """
+        Returns the position (between 0.0 to 1.0) of the current song.
+
+        :return: double
+        """
+        return self.__media_player.get_position()

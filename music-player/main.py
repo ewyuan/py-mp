@@ -2,6 +2,8 @@ import requests
 import bs4
 import threading
 import re
+import time
+import sys
 from player import Player
 
 
@@ -122,13 +124,53 @@ def handle_inputs(player):
 
             prompt_printed = False
 
+def progress_bar(player):
+    length = convert_ms(player.get_length())
+    while player.get_position() != 1.0:
+        current = convert_ms(player.get_time())
+        position = player.get_position()
+        title = player.get_current_song().get_title()
+        pound = "=" * int(40 * position)
+        dash = "-" * int((40 * (1 - position)))
+        progress = "[" + pound + dash + "] (" + str(int(position * 100)) + "%) " + current + " of " + length
+        text = title + ": " + progress
+        sys.stdout.write('\r')
+        sys.stdout.write(text)
+        sys.stdout.flush()
+        time.sleep(1)
+
+def convert_ms(ms):
+    seconds = (ms / 1000) % 60
+    seconds = int(seconds)
+    if seconds < 10:
+        seconds = "0" + str(seconds)
+    else:
+        seconds = str(seconds)
+
+    minutes = (ms / (1000 * 60)) % 60
+    minutes = int(minutes)
+    if minutes < 10:
+        minutes = "0" + str(minutes)
+    else:
+        minutes = str(minutes)
+
+    hours = (ms / (1000 * 60 * 60)) % 24
+    hours = int(hours)
+    if hours < 10:
+        hours = "0" + str(hours)
+    else:
+        hours = str(hours)
+    return hours + ":" + minutes + ":" + seconds
 
 if __name__ == "__main__":
     player = Player()
     input_thread = threading.Thread(target=handle_inputs, args=(player,))
+    progress_bar = threading.Thread(target=progress_bar, args=(player,))
     input_thread.start()
     while True:
         if player.get_state().value == 6:
             player.play_next()
+        if player.get_state().value == 3:
+            progress_bar.start()
         if threading.active_count() != 2:
             break
