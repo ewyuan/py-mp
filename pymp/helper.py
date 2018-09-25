@@ -82,15 +82,18 @@ def handle_inputs(player):
                 print("Cleared the queue.")
 
             elif user_opt == 'time':
-                length = convert_ms(player.get_length())
-                current = convert_ms(player.get_time())
-                position = player.get_position()
-                title = player.get_current_song().get_title()
-                pound = "=" * int(40 * position)
-                dash = "-" * int((40 * (1 - position)))
-                progress = "[" + pound + dash + "] (" + str(int(position * 100)) + "%) " + current + " of " + length
-                text = title + ": " + progress
-                print(text)
+                if player.get_current_song() is None:
+                    print("No song currently playing")
+                else:
+                    length = convert_ms(player.get_length())
+                    current = convert_ms(player.get_time())
+                    position = player.get_position()
+                    title = player.get_current_song().get_title()
+                    pound = "=" * int(40 * position)
+                    dash = "-" * int((40 * (1 - position)))
+                    progress = "[" + pound + dash + "] (" + str(int(position * 100)) + "%) " + current + " of " + length
+                    text = title + ": " + progress
+                    print(text)
 
             elif user_opt == 'pause':
                 player.pause()
