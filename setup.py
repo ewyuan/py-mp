@@ -15,5 +15,5 @@ setup(
         ]
     },
     version='1.0',
-    install_requires=['python-vlc', 'requests', 'beautifulsoup4', 'pafy'],
+    install_requires=['python-vlc', 'requests', 'beautifulsoup4', 'pafy', 'youtube-dl'],
 )
