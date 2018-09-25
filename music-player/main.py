@@ -23,9 +23,14 @@ def grab_search_query(search_query):
 
     regex = re.compile("^/watch\?v=.*$")
     filtered_videos = []
+
     for item in videos:
         if regex.search(item["href"]):
             filtered_videos.append(item["href"])
+
+    if len(filtered_videos) == 0:
+        return None
+
     most_relevant_url = base_url + filtered_videos[0]
     return most_relevant_url
 
@@ -33,7 +38,12 @@ def grab_search_query(search_query):
 def handle_inputs(player):
     search_query = input("Please enter the song you are searching for: ")
     url = grab_search_query(search_query)
-    player.add_song(url)
+
+    if url is not None:
+        player.add_song(url)
+    else:
+        print("Song '" + search_query + "' not found.")
+
     prompt_printed = False
     user_opt = ""
     while True:
