@@ -43,6 +43,6 @@ class Song:
         """
         Returns the media of this Song.
 
-        :return: str
+        :return: Media
         """
         return self.__media

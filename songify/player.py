@@ -14,8 +14,6 @@ class Player:
         self.__next_song = None
         self.__previous_song = None
 
-        self.__is_occupied = False
-
         self.__vlc_instance = vlc.Instance()
         self.__media_player = self.__vlc_instance.media_player_new()
 
@@ -57,7 +55,6 @@ class Player:
         :param pos: int
         :return: Song
         """
-
         if self.__queue[pos] == self.__next_song:
             if not pos == self.get_queue_size() - 1:
                 self.__next_song = self.__queue[pos+1]
@@ -104,7 +101,6 @@ class Player:
 
         :return: none
         """
-
         self.__media_player.set_pause(False)
 
     def __stop(self):
@@ -113,7 +109,6 @@ class Player:
 
         :return: none
         """
-
         self.__media_player.stop()
 
         self.__previous_song = self.__current_song
@@ -128,7 +123,6 @@ class Player:
 
         :return: none
         """
-
         self.__stop()
 
         if len(self.__queue) > 0:
@@ -140,7 +134,6 @@ class Player:
 
         :return: none
         """
-
         if self.get_queue_size() == 0:
             print("No songs in queue to play.")
         else:

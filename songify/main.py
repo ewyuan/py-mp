@@ -6,7 +6,6 @@ import time
 import sys
 from player import Player
 
-
 def grab_search_query(search_query):
     """
     Returns the most relevant URL with the corresponding search query.
@@ -36,6 +35,11 @@ def grab_search_query(search_query):
 
 
 def handle_inputs(player):
+    """
+    Prompts the user for input and handles options they select.
+
+    :return: None
+    """
     search_query = input("Please enter the song you are searching for: ")
     url = grab_search_query(search_query)
 
@@ -152,6 +156,12 @@ def handle_inputs(player):
 
 
 def convert_ms(ms):
+    """
+    Converts milliseconds into h:m:s
+
+    :param ms: int
+    :return: str
+    """
     seconds = (ms / 1000) % 60
     seconds = int(seconds)
     if seconds < 10:
