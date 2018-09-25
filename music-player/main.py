@@ -50,12 +50,13 @@ def handle_inputs(player):
                       "queue - Prints the current queue\n"
                       "skip - Plays the next song in queue\n"
                       "cur - Get the title of the current song\n"
+                      "time - Get the time of the current song\n"
                       "prev - Get the title of the previous song\n"
                       "rewind - Restart the current song\n"
                       "remove [pos] - Removes the song in position [pos] from the q\n"
                       "exit - Exits the program\n")
 
-            elif user_opt[0:3] == 'add':
+            elif user_opt[0:3] == 'add' and len(user_opt) > 4:
                 query = user_opt[4:]
                 url = grab_search_query(query)
                 player.add_song(url)
@@ -64,6 +65,17 @@ def handle_inputs(player):
             elif user_opt == 'clear':
                 player.clear_queue()
                 print("Cleared the queue.")
+
+            elif user_opt == 'time':
+                length = convert_ms(player.get_length())
+                current = convert_ms(player.get_time())
+                position = player.get_position()
+                title = player.get_current_song().get_title()
+                pound = "=" * int(40 * position)
+                dash = "-" * int((40 * (1 - position)))
+                progress = "[" + pound + dash + "] (" + str(int(position * 100)) + "%) " + current + " of " + length
+                text = title + ": " + progress
+                print(text)
 
             elif user_opt == 'pause':
                 player.pause()
@@ -124,20 +136,6 @@ def handle_inputs(player):
 
             prompt_printed = False
 
-def progress_bar(player):
-    length = convert_ms(player.get_length())
-    while player.get_position() != 1.0:
-        current = convert_ms(player.get_time())
-        position = player.get_position()
-        title = player.get_current_song().get_title()
-        pound = "=" * int(40 * position)
-        dash = "-" * int((40 * (1 - position)))
-        progress = "[" + pound + dash + "] (" + str(int(position * 100)) + "%) " + current + " of " + length
-        text = title + ": " + progress
-        sys.stdout.write('\r')
-        sys.stdout.write(text)
-        sys.stdout.flush()
-        time.sleep(1)
 
 def convert_ms(ms):
     seconds = (ms / 1000) % 60
@@ -162,15 +160,13 @@ def convert_ms(ms):
         hours = str(hours)
     return hours + ":" + minutes + ":" + seconds
 
+
 if __name__ == "__main__":
     player = Player()
     input_thread = threading.Thread(target=handle_inputs, args=(player,))
-    progress_bar = threading.Thread(target=progress_bar, args=(player,))
     input_thread.start()
     while True:
         if player.get_state().value == 6:
             player.play_next()
-        if player.get_state().value == 3:
-            progress_bar.start()
         if threading.active_count() != 2:
             break
