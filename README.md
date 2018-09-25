@@ -1,5 +1,5 @@
-# songify
-Songify uses command-line to take in inputs from the user and makes a search query on Youtube. Songify will pull the most relevant video and will stream the audio to the computer.
+# py-mp
+py-mp uses command-line to take in inputs from the user and makes a search query on Youtube. py-mp will pull the most relevant video and will stream the audio to the computer.
 
 ## Prerequisites
 * Python 3 https://www.python.org/downloads/
@@ -7,12 +7,12 @@ Songify uses command-line to take in inputs from the user and makes a search que
 
 ## How to install
 ```
->> pip3 install songify
+>> pip3 install py-mp
 ```
 
 ## How to run
 ```
->> songify       # this can be done from any directory
+>> py-mp       # this can be done from any directory
 ```
 
 ## 'help' page
