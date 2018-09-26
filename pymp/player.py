@@ -194,3 +194,15 @@ class Player:
         :return: double
         """
         return self.__media_player.get_position()
+
+    def play_over_cur_song(self, url):
+        """
+        Plays the requested song, stopping the current song.
+
+        :return: None
+        """
+        self.__stop()
+        new_song = Song(url, self.__vlc_instance)
+        self.__media_player.set_media(new_song.get_media())
+        self.__media_player.play()
+        self.__current_song = new_song

@@ -2,7 +2,6 @@ import requests
 import bs4
 import re
 
-
 def grab_search_query(search_query):
     """
     Returns the most relevant URL with the corresponding search query.
@@ -65,6 +64,7 @@ def handle_inputs(player):
                       "prev - Get the title of the previous song\n"
                       "rewind - Restart the current song\n"
                       "remove [pos] - Removes the song in position [pos] from the q\n"
+                      "play [song] - Stops the current song and plays [song] instead\n"
                       "exit - Exits the program\n")
 
             elif user_opt[0:3] == 'add' and len(user_opt) > 4:
@@ -75,7 +75,7 @@ def handle_inputs(player):
                     player.add_song(url)
                     print("Added '" + query + "' to queue.")
                 else:
-                    print("Song '" + search_query + "' not found.")
+                    print("Song '" + query + "' not found.")
 
             elif user_opt == 'clear':
                 player.clear_queue()
@@ -145,6 +145,16 @@ def handle_inputs(player):
                     else:
                         removed_song = player.remove_song(pos)
                         print("Removed " + removed_song.get_title() + " from queue")
+
+            elif user_opt[0:4] == 'play':
+                query = user_opt[4:]
+                url = grab_search_query(query)
+
+                if url is not None:
+                    player.play_over_cur_song(url)
+                    print("Playing '" + query + "'.")
+                else:
+                    print("Song '" + query + "' not found.")
 
             elif user_opt == 'exit':
                 break
