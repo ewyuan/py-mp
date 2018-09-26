@@ -3,11 +3,25 @@ py-mp uses command-line to take in inputs from the user and makes a search query
 
 ## Prerequisites
 * Python 3 https://www.python.org/downloads/
-* VLC https://www.videolan.org/vlc/
+* VLC (Please look at installation for specific instructions on installing VLC) https://www.videolan.org/vlc/
 
 ## How to install
+### Windows
+1. Install VLC (32bit) from https://www.videolan.org/vlc/
+2.
 ```
 >> pip3 install py-mp
+```
+### Mac
+1. Install VLC from https://www.videolan.org/vlc/
+2.
+```
+>> pip3 install py-mp
+```
+### Linux
+```
+>> pip3 install py-mp
+>> sudo apt-get install vlc
 ```
 
 ## How to run
