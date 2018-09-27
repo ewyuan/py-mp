@@ -1,4 +1,4 @@
-import vlc
+from .vlc import *
 from .song import Song
 
 
@@ -14,7 +14,7 @@ class Player:
         self.__next_song = None
         self.__previous_song = None
 
-        self.__vlc_instance = vlc.Instance()
+        self.__vlc_instance = Instance()
         self.__media_player = self.__vlc_instance.media_player_new()
 
     def get_queue_size(self):
@@ -121,7 +121,7 @@ class Player:
         state = self.__media_player.get_state()
         self.__media_player.set_pause(0)
         self.__media_player.set_time(0)
-        if state == vlc.State.Paused:
+        if state == State.Paused:
             self.__media_player.set_pause(1)
 
     def skip(self):
