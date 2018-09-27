@@ -109,7 +109,10 @@ class Player:
 
         :return: none
         """
-        self.__media_player.stop()
+        try:
+            self.__media_player.stop()
+        except:
+            pass
 
         self.__previous_song = self.__current_song
         self.__current_song = None
@@ -127,7 +130,7 @@ class Player:
 
         :return: none
         """
-        self.__stop()
+        self.__media_player.stop()
 
         if len(self.__queue) > 0:
             self.play_next()
@@ -138,6 +141,8 @@ class Player:
 
         :return: none
         """
+        self.__previous_song = self.__current_song
+
         if self.get_queue_size() == 0:
             print("No songs in queue to play.")
         else:
@@ -199,6 +204,7 @@ class Player:
         """
         Plays the requested song, stopping the current song.
 
+        :param: url: the url of the song
         :return: None
         """
         self.__stop()
@@ -206,3 +212,29 @@ class Player:
         self.__media_player.set_media(new_song.get_media())
         self.__media_player.play()
         self.__current_song = new_song
+
+    def __get_volume(self):
+        """
+        Returns the current volume of the player.
+
+        :return: None
+        """
+        return self.__media_player.audio_get_volume()
+
+    def increase_vol(self, pct):
+        """
+        Increase the volume by pct percentage
+
+        :param: pct: 0-100 percentage to increase the volume by
+        :return: None
+        """
+        self.__media_player.audio_set_volume(min(100, self.__get_volume()+pct))
+
+    def decrease_vol(self, pct):
+        """
+        Decrease the volume by pct percentage
+
+        :param: pct: 0-100 percentage to decrease the volume by
+        :return: None
+        """
+        self.__media_player.audio_set_volume(max(0, self.__get_volume()-pct))

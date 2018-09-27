@@ -9,8 +9,11 @@ def main():
     input_thread = threading.Thread(target=handle_inputs, args=(player,))
     input_thread.start()
     while True:
-        if player.get_state().value == vlc.State.Ended and player.get_queue_size() > 0:
-            player.play_next()
+        if player.get_state().value == vlc.State.Ended:
+            if player.get_queue_size() > 0:
+                player.play_next()
+            else:
+                player.skip()
         if threading.active_count() != 2:
             break
 
