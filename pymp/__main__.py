@@ -1,5 +1,5 @@
 import threading
-import vlc
+from .vlc import *
 from .player import Player
 from .helper import handle_inputs
 
