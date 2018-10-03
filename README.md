@@ -1,4 +1,6 @@
 # py-mp
+[![Downloads](https://pepy.tech/badge/py-mp)](https://pepy.tech/project/py-mp)
+
 py-mp uses command-line to take in inputs from the user and makes a search query on Youtube. py-mp will pull the most relevant video and will stream the audio to the computer.
 
 ## Prerequisites
