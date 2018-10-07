@@ -1,5 +1,8 @@
 # py-mp
+[![Build](https://travis-ci.org/ewyuan/py-mp.svg?branch=master)](https://github.com/ewyuan/py-mp)
+[![PyPI](https://img.shields.io/badge/pypi-1.2-blue.svg)](https://pypi.org/project/py-mp/)
 [![Downloads](https://pepy.tech/badge/py-mp)](https://pepy.tech/project/py-mp)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/ewyuan/py-mp/blob/master/LICENSE)
 
 py-mp uses command-line to take in inputs from the user and makes a search query on Youtube. py-mp will pull the most relevant video and will stream the audio to the computer.
 
