@@ -50,6 +50,9 @@ remove [position]     # Removes the song in position [position] from the queue
 exit                  # Exits the program
 ```
 
+## To-do
+1. Remove the VLC dependency
+
 ## Contributors
 * Eddy Maric https://github.com/EddyMaric
 * Eric Yuan https://github.com/ewyuan/
