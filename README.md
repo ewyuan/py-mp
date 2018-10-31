@@ -51,8 +51,8 @@ exit                  # Exits the program
 ```
 
 ## To-do
-[] Remove the VLC dependency
-[] Support livestream audio
+- [ ] Remove the VLC dependency
+- [ ] Support livestream audio
 
 ## Contributors
 * Eddy Maric https://github.com/EddyMaric
